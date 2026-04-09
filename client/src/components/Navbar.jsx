@@ -35,10 +35,8 @@ const Navbar = () => {
             <NavLink to="/" className={({ isActive }) => `flex items-center font-bold transition-all ${isActive ? 'text-[#FF9933]' : 'text-gray-700 hover:text-[#FF9933]'}`}>
               <Home className="w-4 h-4 mr-1 text-[#FF9933]" /> {t.home}
             </NavLink>
-            <NavLink to="#" className={ `flex items-center font-bold transition-all  'text-[#FF9933]' : 'text-gray-700 hover:text-[#FF9933]'}`}>
-               Activities
-              </NavLink>
-            <NavLink to="/donate-cow" className={({ isActive }) => `flex items-center font-bold transition-all ${isActive ? 'text-[#FF9933]' : 'text-gray-700 hover:text-[#FF9933]'}`}>
+
+            {/* <NavLink to="/donate-cow" className={({ isActive }) => `flex items-center font-bold transition-all ${isActive ? 'text-[#FF9933]' : 'text-gray-700 hover:text-[#FF9933]'}`}>
               <Heart className="w-4 h-4 mr-1 text-[#FF9933]" /> {t.donate}
             </NavLink>
             <NavLink to="/bhandara" className={({ isActive }) => `flex items-center font-bold transition-all ${isActive ? 'text-[#FF9933]' : 'text-gray-700 hover:text-[#FF9933]'}`}>
@@ -49,14 +47,21 @@ const Navbar = () => {
             </NavLink>
             <NavLink to="/membership" className={({ isActive }) => `flex items-center font-bold transition-all ${isActive ? 'text-[#FF9933]' : 'text-gray-700 hover:text-[#FF9933]'}`}>
               <Star className="w-4 h-4 mr-1 text-[#FF9933]" /> {t.membership}
+            </NavLink> */}
+            
+            <NavLink to="#" className={`flex items-center font-bold transition-all  'text-[#FF9933]' : 'text-gray-700 hover:text-[#FF9933]'}`}>
+              Vision & Mission
             </NavLink>
-            
-            
-            
+            <NavLink to="#" className={`flex items-center font-bold transition-all  'text-[#FF9933]' : 'text-gray-700 hover:text-[#FF9933]'}`}>
+              Activities
+            </NavLink>
+
+
+
             <div className="flex items-center gap-2">
               <div className="flex bg-gray-100 p-1 rounded-xl shadow-sm border border-gray-200">
-                 <button onClick={() => toggleLanguage('en')} className={`px-4 py-1.5 rounded-lg text-xs font-black transition-all ${language === 'en' ? 'bg-white shadow-sm text-[#FF9933]' : 'text-gray-400 hover:text-gray-600'}`}>EN</button>
-                 <button onClick={() => toggleLanguage('hi')} className={`px-4 py-1.5 rounded-lg text-xs font-black transition-all ${language === 'hi' ? 'bg-white shadow-sm text-[#FF9933]' : 'text-gray-400 hover:text-gray-600'}`}>हिन्दी</button>
+                <button onClick={() => toggleLanguage('en')} className={`px-4 py-1.5 rounded-lg text-xs font-black transition-all ${language === 'en' ? 'bg-white shadow-sm text-[#FF9933]' : 'text-gray-400 hover:text-gray-600'}`}>EN</button>
+                <button onClick={() => toggleLanguage('hi')} className={`px-4 py-1.5 rounded-lg text-xs font-black transition-all ${language === 'hi' ? 'bg-white shadow-sm text-[#FF9933]' : 'text-gray-400 hover:text-gray-600'}`}>हिन्दी</button>
               </div>
 
               {/* More Languages Dropdown */}
@@ -88,11 +93,11 @@ const Navbar = () => {
             </Link>
           </div>
           <div className="md:hidden flex items-center gap-4">
-             <div className="flex bg-gray-100 p-1 rounded-lg">
-                <button onClick={() => toggleLanguage(language === 'en' ? 'hi' : 'en')} className="px-3 py-1 text-xs font-black text-gray-600 uppercase">
-                   {language === 'en' ? 'HI' : 'EN'}
-                </button>
-             </div>
+            <div className="flex bg-gray-100 p-1 rounded-lg">
+              <button onClick={() => toggleLanguage(language === 'en' ? 'hi' : 'en')} className="px-3 py-1 text-xs font-black text-gray-600 uppercase">
+                {language === 'en' ? 'HI' : 'EN'}
+              </button>
+            </div>
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none"
@@ -117,17 +122,17 @@ const Navbar = () => {
                 <button onClick={() => toggleLanguage('en')} className={`py-2 rounded-lg text-xs font-bold ${language === 'en' ? 'bg-[#FF9933] text-white' : 'bg-gray-100 text-gray-600'}`}>English</button>
                 <button onClick={() => toggleLanguage('hi')} className={`py-2 rounded-lg text-xs font-bold ${language === 'hi' ? 'bg-[#FF9933] text-white' : 'bg-gray-100 text-gray-600'}`}>हिन्दी</button>
               </div>
-              <div className="grid grid-cols-3 gap-2 mt-2">
+              {/* <div className="grid grid-cols-3 gap-2 mt-2">
                 {otherLanguages.map(lang => (
-                  <button 
+                  <button
                     key={lang.code}
-                    onClick={() => toggleLanguage(lang.code)} 
+                    onClick={() => toggleLanguage(lang.code)}
                     className={`py-2 rounded-lg text-[10px] font-bold ${language === lang.code ? 'bg-[#FF9933] text-white' : 'bg-gray-100 text-gray-600'}`}
                   >
                     {lang.name}
                   </button>
                 ))}
-              </div>
+              </div> */}
               <Link to="/donate-cow" className="w-full btn-primary block text-center mt-6 py-4">{t.donate}</Link>
             </div>
           </div>
