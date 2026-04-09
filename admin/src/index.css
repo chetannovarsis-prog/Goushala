@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+:root {
+  --saffron: #FF9933;
+  --cream: #EDDDC7;
+  --brown: #4D2D0E;
+}
+
+body {
+  background-color: #f9fafb;
+  color: var(--brown);
+  font-family: 'Inter', sans-serif;
+}
+
+.btn-primary {
+  @apply bg-[#FF9933] text-white px-6 py-2 rounded-lg font-bold hover:bg-[#e68a2e] transition-colors;
+}
+
+.input-field {
+  @apply w-full p-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#FF9933] bg-white transition-all;
+}
+
+.card {
+  @apply bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden;
+}

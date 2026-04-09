@@ -1,0 +1,140 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  name      String   @db.VarChar(255)
+  email     String   @db.VarChar(255) @unique
+  password  String   @db.VarChar(255)
+  role      String   @default("admin") // admin/user
+  createdAt DateTime @default(now())
+}
+
+model Donation {
+  id           Int      @id @default(autoincrement())
+  name         String
+  phone        String
+  whatsapp     String
+  email        String
+  type         String   // cow / bhandara
+  quantity     Int      @default(1)
+  amount       Float
+  status       String   @default("pending") // pending / success / failed
+  razorpay_order_id String?
+  razorpay_payment_id String?
+  qr_id        String?  // Razorpay QR ID
+  
+  // New Fields
+  require80G   Boolean  @default(false)
+  address      String?
+  pan          String?
+  referral     String?
+  profession   String?
+  
+  createdAt    DateTime @default(now())
+}
+
+model CowPricing {
+  id    Int   @id @default(autoincrement())
+  price Float @default(5000)
+}
+
+model BhandaraCategory {
+  id          Int    @id @default(autoincrement())
+  title       String
+  peopleCount Int
+  price       Float
+}
+
+model GurukulApplication {
+  id          Int      @id @default(autoincrement())
+  studentName String
+  age         Int
+  parentName  String
+  phone       String
+  whatsapp    String?
+  address     String
+  education   String
+  profession  String?
+  referral    String?
+  status      String   @default("pending") // pending / approved / rejected
+  createdAt   DateTime @default(now())
+}
+
+model Karyakarta {
+  id          Int      @id @default(autoincrement())
+  name        String
+  role        String
+  phone       String
+  joiningDate DateTime @default(now())
+}
+
+model Student {
+  id          Int    @id @default(autoincrement())
+  name        String
+  details     String
+  admittedAt  DateTime @default(now())
+}
+
+model Transaction {
+  id               Int      @id @default(autoincrement())
+  type             String   // pay-in / pay-out
+  amount           Float
+  transaction_type String   // donation, membership, cow_purchase, cow_feed, medical, salary, maintenance, bhandara, other
+  category         String?
+  payment_mode     String?
+  reference_id     String?
+  user_id          Int?
+  description      String
+  attachment_url   String?
+  recurring        String?  @default("none")
+  date             DateTime @default(now())
+  createdAt        DateTime @default(now())
+}
+
+model MembershipPlan {
+  id          Int      @id @default(autoincrement())
+  name        String
+  type        String   // yearly / lifetime
+  price       Float
+  description String?
+  benefits    String[] // Array of strings
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Membership {
+  id             Int      @id @default(autoincrement())
+  memberId       String   @unique  // 6-digit unique membership ID
+  userId         Int      @default(0)
+  name           String?
+  email          String?
+  phone          String?
+  whatsapp       String?
+  type           String   // yearly / lifetime
+  planAmount     Float
+  status         String   @default("active") // active / expired (membership validity)
+  payment_status String   @default("pending") // pending / success / failed
+  
+  razorpay_order_id   String?
+  razorpay_payment_id String?
+  qr_id               String? // Razorpay QR ID
+  
+  // New Fields
+  require80G   Boolean  @default(false)
+  address      String?
+  pan          String?
+  referral     String?
+  profession   String?
+  
+  startDate      DateTime @default(now())
+  endDate        DateTime?
+  certificateUrl String?
+  createdAt      DateTime @default(now())
+}

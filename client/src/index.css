@@ -1,0 +1,42 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Noto+Sans+Devanagari:wght@100..900&display=swap');
+
+:root {
+  --saffron: #FF9933;
+  --cream: #EDDDC7;
+  --brown: #4D2D0E;
+  --forest-green: #2E7D32;
+  --font-en: 'Poppins', sans-serif;
+  --font-hi: 'Noto Sans Devanagari', sans-serif;
+}
+
+.btn-secondary {
+  @apply bg-[#2E7D32] text-white px-6 py-2 rounded-lg font-bold hover:bg-[#1B5E20] transition-colors;
+}
+
+body {
+  background-color: var(--cream);
+  color: var(--brown);
+  font-family: var(--font-en);
+  transition: font-family 0.3s ease;
+}
+
+body.lang-hi {
+  font-family: var(--font-hi);
+}
+
+body.lang-mr, body.lang-gu, body.lang-pa, body.lang-bn, body.lang-ta, body.lang-te, body.lang-kn, body.lang-ml {
+  font-family: var(--font-hi); /* Noto Sans Devanagari often covers other scripts or is a good fallback for Indic */
+}
+
+.btn-primary {
+  @apply bg-[#FF9933] text-white px-6 py-2 rounded-lg font-bold hover:bg-[#e68a2e] transition-colors;
+}
+
+.card {
+  @apply bg-white rounded-xl shadow-md overflow-hidden;
+}
+
+.input-field {
+  @apply w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF9933];
+}
