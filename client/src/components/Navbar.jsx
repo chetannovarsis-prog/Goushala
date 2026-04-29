@@ -35,8 +35,7 @@ const Navbar = () => {
             <NavLink to="/" className={({ isActive }) => `flex items-center font-bold transition-all ${isActive ? 'text-[#FF9933]' : 'text-gray-700 hover:text-[#FF9933]'}`}>
               <Home className="w-4 h-4 mr-1 text-[#FF9933]" /> {t.home}
             </NavLink>
-
-            {/* <NavLink to="/donate-cow" className={({ isActive }) => `flex items-center font-bold transition-all ${isActive ? 'text-[#FF9933]' : 'text-gray-700 hover:text-[#FF9933]'}`}>
+            <NavLink to="/donate-cow" className={({ isActive }) => `flex items-center font-bold transition-all ${isActive ? 'text-[#FF9933]' : 'text-gray-700 hover:text-[#FF9933]'}`}>
               <Heart className="w-4 h-4 mr-1 text-[#FF9933]" /> {t.donate}
             </NavLink>
             <NavLink to="/bhandara" className={({ isActive }) => `flex items-center font-bold transition-all ${isActive ? 'text-[#FF9933]' : 'text-gray-700 hover:text-[#FF9933]'}`}>
@@ -47,16 +46,8 @@ const Navbar = () => {
             </NavLink>
             <NavLink to="/membership" className={({ isActive }) => `flex items-center font-bold transition-all ${isActive ? 'text-[#FF9933]' : 'text-gray-700 hover:text-[#FF9933]'}`}>
               <Star className="w-4 h-4 mr-1 text-[#FF9933]" /> {t.membership}
-            </NavLink> */}
+            </NavLink> 
             
-            <NavLink to="#" className={`flex items-center font-bold transition-all  'text-[#FF9933]' : 'text-gray-700 hover:text-[#FF9933]'}`}>
-              Vision & Mission
-            </NavLink>
-            <NavLink to="#" className={`flex items-center font-bold transition-all  'text-[#FF9933]' : 'text-gray-700 hover:text-[#FF9933]'}`}>
-              Activities
-            </NavLink>
-
-
 
             <div className="flex items-center gap-2">
               <div className="flex bg-gray-100 p-1 rounded-xl shadow-sm border border-gray-200">
