@@ -35,9 +35,6 @@ const Navbar = () => {
             <NavLink to="/" className={({ isActive }) => `flex items-center font-bold transition-all ${isActive ? 'text-[#FF9933]' : 'text-gray-700 hover:text-[#FF9933]'}`}>
               <Home className="w-4 h-4 mr-1 text-[#FF9933]" /> {t.home}
             </NavLink>
-            <NavLink to="#" className={ `flex items-center font-bold transition-all  'text-[#FF9933]' : 'text-gray-700 hover:text-[#FF9933]'}`}>
-               Activities
-              </NavLink>
             <NavLink to="/donate-cow" className={({ isActive }) => `flex items-center font-bold transition-all ${isActive ? 'text-[#FF9933]' : 'text-gray-700 hover:text-[#FF9933]'}`}>
               <Heart className="w-4 h-4 mr-1 text-[#FF9933]" /> {t.donate}
             </NavLink>
