@@ -30,11 +30,21 @@ router.post('/students', adminController.addStudent);
 // Accounting
 router.get('/transactions', adminController.getTransactions);
 router.post('/transactions', adminController.addTransaction);
+router.put('/transactions/:id', adminController.updateTransaction);
+router.delete('/transactions/:id', adminController.deleteTransaction);
 
 // Memberships
 router.get('/memberships', adminController.getMemberships);
 router.get('/memberships/:id', adminController.getMembershipById);
 router.post('/memberships', adminController.addMembership);
+router.put('/memberships/:id', adminController.updateMembership);
+router.delete('/memberships/:id', adminController.deleteMembership);
+
+// Donations (Admin)
+router.get('/donations', adminController.getDonations);
+router.get('/donations/:id', adminController.getDonationById);
+router.put('/donations/:id', adminController.updateDonation);
+router.delete('/donations/:id', adminController.deleteDonation);
 
 // Membership Plans Admin
 router.post('/membership-plans', membershipPlanController.createPlan);

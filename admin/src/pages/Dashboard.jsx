@@ -65,16 +65,36 @@ const Dashboard = () => {
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-50">
-              {stats.recentTransactions.map((tx) => (
+              {(stats.recentTransactions || []).map((tx) => (
                 <tr key={tx.id} className="hover:bg-gray-50/50 transition-colors">
                   <td className="px-8 py-5 font-bold text-gray-700">{tx.name}</td>
                   <td className="px-8 py-5">
-                     <span className="bg-gray-100 text-gray-600 px-3 py-1 rounded-lg text-xs font-bold uppercase">{tx.type}</span>
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <span className="bg-gray-100 text-gray-600 px-3 py-1 rounded-lg text-xs font-bold uppercase">{tx.type}</span>
+                      <span className={`px-3 py-1 rounded-lg text-xs font-black uppercase ${tx.status === 'success' ? 'bg-green-100 text-green-700' : tx.status === 'failed' ? 'bg-red-100 text-red-700' : 'bg-yellow-100 text-yellow-700'}`}>
+                        {tx.status}
+                      </span>
+                    </div>
                   </td>
                   <td className="px-8 py-5 font-black text-green-600">₹{tx.amount.toLocaleString()}</td>
-                  <td className="px-8 py-5 text-gray-400 text-sm">{new Date(tx.createdAt).toLocaleDateString()}</td>
+                  <td className="px-8 py-5 text-gray-400 text-sm">
+                    {new Date(tx.createdAt).toLocaleString(undefined, {
+                      year: 'numeric',
+                      month: 'numeric',
+                      day: 'numeric',
+                      hour: 'numeric',
+                      minute: '2-digit',
+                    })}
+                  </td>
                 </tr>
               ))}
+              {(stats.recentTransactions || []).length === 0 && (
+                <tr>
+                  <td colSpan="4" className="px-8 py-16 text-center text-gray-200 font-black uppercase tracking-widest">
+                    No recent activities
+                  </td>
+                </tr>
+              )}
             </tbody>
           </table>
         </div>

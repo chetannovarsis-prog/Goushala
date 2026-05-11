@@ -5,6 +5,9 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
+    "backup:db": "node scripts/backup-db.js",
+    "backup:db:custom": "node scripts/backup-db.js --format=custom",
+    "restore:db": "node scripts/restore-db.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "prisma": {

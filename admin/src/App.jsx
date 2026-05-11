@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import Donations from './pages/Donations';
+import DonationDetail from './pages/DonationDetail';
 import CowPricing from './pages/CowPricing';
 import Bhandara from './pages/Bhandara';
 import Gurukul from './pages/Gurukul';
@@ -26,6 +27,7 @@ function App() {
           <Route index element={<Navigate to="/dashboard" replace />} />
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="donations" element={<Donations />} />
+          <Route path="donations/:id" element={<DonationDetail />} />
           <Route path="cow-pricing" element={<CowPricing />} />
           <Route path="bhandara" element={<Bhandara />} />
           <Route path="gurukul" element={<Gurukul />} />

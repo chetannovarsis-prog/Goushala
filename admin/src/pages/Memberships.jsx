@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Users, ShieldCheck, Mail, Calendar, Search, Filter, Loader2, Download } from 'lucide-react';
+import { Users, ShieldCheck, Mail, Calendar, Search, Filter, Loader2, Pencil } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import api from '../utils/api';
 import { useLanguage } from '../context/LanguageContext';
 import { translations as allTranslations } from '../utils/translations';
@@ -8,6 +9,7 @@ import { translations as allTranslations } from '../utils/translations';
 const Memberships = () => {
   const { language } = useLanguage();
   const t = allTranslations[language];
+  const navigate = useNavigate();
   const [memberships, setMemberships] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
@@ -40,10 +42,19 @@ const Memberships = () => {
     setLoading(false);
   };
 
-  const filteredMembers = memberships.filter(m => 
-    m.id.toString().includes(searchTerm) || 
-    m.type.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filteredMembers = memberships.filter(m => {
+    const q = searchTerm.toLowerCase();
+    const name = (m.name || '').toLowerCase();
+    const memberId = (m.memberId || '').toLowerCase();
+    const phone = (m.phone || m.whatsapp || '').toLowerCase();
+    return (
+      String(m.id).includes(searchTerm) ||
+      (m.type || '').toLowerCase().includes(q) ||
+      name.includes(q) ||
+      memberId.includes(q) ||
+      phone.includes(q)
+    );
+  });
 
   return (
     <div className="space-y-8">
@@ -108,7 +119,11 @@ const Memberships = () => {
                {loading ? (
                  <tr><td colSpan="5" className="p-20 text-center"><Loader2 className="animate-spin mx-auto text-[#FF9933]" size={40} /></td></tr>
                ) : filteredMembers.map(m => (
-                 <tr key={m.id} className="hover:bg-gray-50/30 transition-all duration-300">
+                 <tr
+                   key={m.id}
+                   className="hover:bg-gray-50/30 transition-all duration-300 cursor-pointer"
+                   onClick={() => navigate(`/memberships/${m.id}`)}
+                 >
                    <td className="px-10 py-8">
                      <div className="flex items-center gap-3">
                         <div className="w-10 h-10 rounded-xl bg-orange-50 flex items-center justify-center text-[#FF9933] font-black">#{m.userId}</div>
@@ -129,8 +144,8 @@ const Memberships = () => {
                       {m.endDate ? new Date(m.endDate).toLocaleDateString() : 'Infinite'}
                    </td>
                    <td className="px-10 py-8 text-right">
-                      <Link to={`/memberships/${m.id}`} className="inline-flex items-center justify-center p-3 bg-gray-100 rounded-xl text-gray-400 hover:text-[#FF9933] hover:bg-orange-50 transition-all">
-                        <Download size={18} />
+                      <Link onClick={(e) => e.stopPropagation()} to={`/memberships/${m.id}`} className="inline-flex items-center justify-center p-3 bg-gray-100 rounded-xl text-gray-400 hover:text-[#FF9933] hover:bg-orange-50 transition-all">
+                        <Pencil size={18} />
                       </Link>
                    </td>
                  </tr>

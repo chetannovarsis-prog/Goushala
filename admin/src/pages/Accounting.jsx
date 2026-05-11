@@ -2,13 +2,14 @@ import { useLanguage } from '../context/LanguageContext';
 import { translations as allTranslations } from '../utils/translations';
 import { useState, useEffect } from 'react';
 import api from '../utils/api';
-import { Plus, ArrowUpRight, ArrowDownRight, IndianRupee, Filter, X, TrendingUp, TrendingDown, Loader2 } from 'lucide-react';
+import { Plus, ArrowUpRight, ArrowDownRight, IndianRupee, Filter, X, TrendingUp, TrendingDown, Loader2, Pencil, Trash2 } from 'lucide-react';
 
 const Accounting = () => {
   const { language } = useLanguage();
   const t = allTranslations[language].accountingPage;
   const [transactions, setTransactions] = useState([]);
   const [showModal, setShowModal] = useState(false);
+  const [editingTx, setEditingTx] = useState(null);
   const [formData, setFormData] = useState({ 
     type: 'pay-in', 
     amount: '', 
@@ -43,13 +44,66 @@ const Accounting = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      await api.post('/admin/transactions', formData);
+      if (editingTx?.id) {
+        await api.put(`/admin/transactions/${editingTx.id}`, formData);
+      } else {
+        await api.post('/admin/transactions', formData);
+      }
       setShowModal(false);
+      setEditingTx(null);
       fetchTx();
     } catch (err) {
       alert('Failed to save transaction');
     }
     setLoading(false);
+  };
+
+  const openNewTx = () => {
+    setEditingTx(null);
+    setFormData({ 
+      type: 'pay-in', 
+      amount: '', 
+      transaction_type: 'donation',
+      category: '',
+      payment_mode: 'cash',
+      reference_id: '',
+      user_id: '',
+      description: '', 
+      attachment_url: '',
+      recurring: 'none',
+      date: new Date().toISOString().split('T')[0] 
+    });
+    setShowModal(true);
+  };
+
+  const openEditTx = (tx) => {
+    setEditingTx(tx);
+    setFormData({
+      type: tx.type || 'pay-in',
+      amount: tx.amount ?? '',
+      transaction_type: tx.transaction_type || 'donation',
+      category: tx.category || '',
+      payment_mode: tx.payment_mode || 'cash',
+      reference_id: tx.reference_id || '',
+      user_id: tx.user_id ?? '',
+      description: tx.description || '',
+      attachment_url: tx.attachment_url || '',
+      recurring: tx.recurring || 'none',
+      date: tx.date ? new Date(tx.date).toISOString().split('T')[0] : new Date().toISOString().split('T')[0],
+    });
+    setShowModal(true);
+  };
+
+  const deleteTx = async (tx) => {
+    if (!tx?.id) return;
+    const ok = confirm(`Delete this ledger entry (#${tx.id})? This cannot be undone.`);
+    if (!ok) return;
+    try {
+      await api.delete(`/admin/transactions/${tx.id}`);
+      fetchTx();
+    } catch (err) {
+      alert('Failed to delete transaction');
+    }
   };
 
   return (
@@ -59,7 +113,7 @@ const Accounting = () => {
           <h2 className="text-4xl font-black text-gray-800 tracking-tighter uppercase">{t.header}</h2>
           <p className="text-gray-400 font-medium">{t.sub}</p>
         </div>
-        <button onClick={() => setShowModal(true)} className="btn-primary flex items-center gap-3 py-4 px-6 rounded-2xl shadow-xl ring-4 ring-orange-50">
+        <button onClick={openNewTx} className="btn-primary flex items-center gap-3 py-4 px-6 rounded-2xl shadow-xl ring-4 ring-orange-50">
           <Plus size={24} strokeWidth={3}/> <span className="text-lg">{t.newEntry}</span>
         </button>
       </div>
@@ -102,11 +156,12 @@ const Accounting = () => {
                 <th className="px-10 py-6">{t.narration}</th>
                 <th className="px-10 py-6">{t.paymentMode}</th>
                 <th className="px-10 py-6 text-right">{t.value} (₹)</th>
+                <th className="px-10 py-6 text-right">Actions</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-50">
                {transactions.map(tx => (
-                 <tr key={tx.id} className="hover:bg-gray-50/30 transition-all duration-300">
+                 <tr key={tx.id} className="hover:bg-gray-50/30 transition-all duration-300 cursor-pointer" onClick={() => openEditTx(tx)}>
                    <td className="px-10 py-8 text-sm text-gray-400 font-bold tracking-widest uppercase">{new Date(tx.date).toLocaleDateString()}</td>
                    <td className="px-10 py-8">
                      <span className="bg-gray-100 px-3 py-1 rounded-full text-[10px] font-black uppercase text-gray-500">
@@ -120,11 +175,31 @@ const Accounting = () => {
                        {tx.type === 'pay-in' ? '+' : '-'}₹{tx.amount.toLocaleString()}
                      </span>
                    </td>
+                   <td className="px-10 py-8 text-right" onClick={(e) => e.stopPropagation()}>
+                     <div className="inline-flex items-center gap-2">
+                       <button
+                         type="button"
+                         onClick={() => openEditTx(tx)}
+                         className="p-2 rounded-xl bg-gray-100 text-gray-400 hover:bg-orange-50 hover:text-[#FF9933] transition-all"
+                         title="Edit"
+                       >
+                         <Pencil size={18} />
+                       </button>
+                       <button
+                         type="button"
+                         onClick={() => deleteTx(tx)}
+                         className="p-2 rounded-xl bg-gray-100 text-gray-400 hover:bg-red-50 hover:text-red-600 transition-all"
+                         title="Delete"
+                       >
+                         <Trash2 size={18} />
+                       </button>
+                     </div>
+                   </td>
                  </tr>
                ))}
                {transactions.length === 0 && (
                  <tr>
-                   <td colSpan="5" className="p-20 text-center text-gray-200 font-black uppercase tracking-widest">
+                   <td colSpan="6" className="p-20 text-center text-gray-200 font-black uppercase tracking-widest">
                      Empty Ledger
                    </td>
                  </tr>
@@ -137,8 +212,8 @@ const Accounting = () => {
       {showModal && (
         <div className="fixed inset-0 bg-[#4D2D0E]/60 backdrop-blur-md z-[100] flex items-center justify-center p-4 overflow-y-auto">
           <div className="bg-white w-full max-w-2xl p-12 rounded-[3.5rem] shadow-2xl relative shadow-orange-900/10 my-auto">
-            <button onClick={() => setShowModal(false)} className="absolute top-10 right-10 text-gray-300 hover:text-gray-600 transition-colors"><X size={32} /></button>
-            <h3 className="text-3xl font-black text-gray-800 tracking-tighter uppercase mb-2">{t.bookEntry}</h3>
+            <button onClick={() => { setShowModal(false); setEditingTx(null); }} className="absolute top-10 right-10 text-gray-300 hover:text-gray-600 transition-colors"><X size={32} /></button>
+            <h3 className="text-3xl font-black text-gray-800 tracking-tighter uppercase mb-2">{editingTx ? 'Edit Ledger Entry' : t.bookEntry}</h3>
             <p className="text-gray-400 font-medium mb-10">{t.recordMovement}</p>
 
             <form onSubmit={handleSubmit} className="space-y-6">
@@ -205,7 +280,7 @@ const Accounting = () => {
               </div>
 
               <div className="grid grid-cols-2 gap-4 pt-6">
-                <button type="button" onClick={() => setShowModal(false)} className="py-5 font-black text-gray-400 uppercase bg-gray-100 rounded-2xl tracking-widest">{t.discard}</button>
+                <button type="button" onClick={() => { setShowModal(false); setEditingTx(null); }} className="py-5 font-black text-gray-400 uppercase bg-gray-100 rounded-2xl tracking-widest">{t.discard}</button>
                 <button type="submit" disabled={loading} className="py-5 btn-primary text-xl flex items-center justify-center gap-2">
                    {loading ? <Loader2 className="animate-spin" /> : t.commit}
                 </button>

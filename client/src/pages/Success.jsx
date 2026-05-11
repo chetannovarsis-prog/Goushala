@@ -54,7 +54,8 @@ const Success = () => {
 
   const handleDownload = () => {
     const type = isMembership ? 'membership' : 'donation';
-    const downloadUrl = `${import.meta.env.VITE_API_URL}/certificates/generate/${type}/${data.id}`;
+    const apiBase = String(import.meta.env.VITE_API_URL || '').replace(/\/+$/, '');
+    const downloadUrl = `${apiBase}/api/certificates/generate/${type}/${data.id}`;
     
     const link = document.createElement('a');
     link.href = downloadUrl;
