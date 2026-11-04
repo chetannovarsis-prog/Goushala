@@ -39,8 +39,8 @@ const generateCertificate = async (req, res) => {
       }
 
       doc.font('Helvetica-Bold').fontSize(22).fillColor('#4D2D0E').text('SHRI BHARDWAJ SEVA KENDRA', 140, 60);
-      doc.fontSize(10).fillColor('#666').text('Village: Goshala Name, City, State - PIN', 140, 90);
-      doc.text('Reg No: BK/2024/12345 | Contact: +91 1234567890', 140, 105);
+      doc.fontSize(10).fillColor('#666').text('Near Akashvani kendra Station Road, Main Market, Najibabad, UP 246763', 140, 90);
+      doc.text('Reg No: BK/2024/12345 | Contact: +91 7789888000', 140, 105);
       doc.text('Email: info@gaushala.com | Website: www.gaushala.com', 140, 120);
 
       doc.moveDown(4);
