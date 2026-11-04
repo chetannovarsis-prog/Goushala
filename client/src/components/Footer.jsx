@@ -12,6 +12,18 @@ const Footer = () => {
   const nameLabel = language === 'en' ? 'Account Holder' : 'खाता धारक';
   const ifscLabel = language === 'en' ? 'IFSC Code' : 'आईएफएससी कोड';
 
+  const bankDetails = {
+    bank: 'Axis Bank',
+    branch: 'Vijay Nagar, Indore',
+    accountNumber: '925020019347442',
+    accountHolder: 'Jyotishiwala',
+    ifsc: 'UTIB0000568',
+  };
+
+  const upiId = `${bankDetails.accountNumber}@${bankDetails.ifsc}.ifsc.npci`;
+  const upiUrl = `upi://pay?pa=${upiId}&pn=${encodeURIComponent(bankDetails.accountHolder)}&cu=INR&tn=${encodeURIComponent('Gaushala Donation')}`;
+  const dynamicQrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&margin=8&data=${encodeURIComponent(upiUrl)}`;
+
   return (
     <footer className="bg-[#4D2D0E] text-white py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -41,20 +53,26 @@ const Footer = () => {
           <div className="xl:col-span-3">
             <h3 className="text-2xl font-extrabold mb-5 text-[#FFB02E]">{donateTitle}</h3>
             <div className="inline-block rounded-2xl bg-[#173D34] p-4 shadow-lg shadow-black/20">
-              <div className="overflow-hidden rounded-xl border-2 border-white/80 bg-white">
-                <img
-                  src="/Images/qr.png"
-                  alt="Donation QR"
-                  className="w-full max-w-[240px] h-auto object-contain"
-                />
+              <div className="overflow-hidden rounded-xl border-2 border-white/80 bg-white p-2">
+                <a href={upiUrl} title="Scan or click to pay via UPI" className="block group">
+                  <img
+                    src={dynamicQrUrl}
+                    onError={(e) => { e.currentTarget.src = "/Images/qr.png"; }}
+                    alt={`Donation QR - ${bankDetails.accountHolder}`}
+                    className="w-full max-w-[240px] h-auto object-contain transition-transform duration-300 group-hover:scale-[1.02]"
+                  />
+                </a>
+                <div className="text-center pt-2 pb-1 border-t border-gray-100 mt-2">
+                  <span className="text-[11px] font-bold text-gray-700 tracking-wider uppercase">Scan to Pay via UPI</span>
+                </div>
               </div>
             </div>
             <div className="mt-6 space-y-3 text-white text-base leading-relaxed max-w-xs">
-              <p><span className="font-semibold">{bankLabel}</span> - Axis Bank</p>
-              <p><span className="font-semibold">{branchLabel}</span> - Vijay Nagar, Indore</p>
-              <p><span className="font-semibold">{accountLabel}</span> - 925020019347442</p>
-              <p><span className="font-semibold">{nameLabel}</span> - Jyotishiwala</p>
-              <p><span className="font-semibold">{ifscLabel}</span> - UTIB0000568</p>
+              <p><span className="font-semibold">{bankLabel}</span> - {bankDetails.bank}</p>
+              <p><span className="font-semibold">{branchLabel}</span> - {bankDetails.branch}</p>
+              <p><span className="font-semibold">{accountLabel}</span> - {bankDetails.accountNumber}</p>
+              <p><span className="font-semibold">{nameLabel}</span> - {bankDetails.accountHolder}</p>
+              <p><span className="font-semibold">{ifscLabel}</span> - {bankDetails.ifsc}</p>
             </div>
           </div>
         </div>
