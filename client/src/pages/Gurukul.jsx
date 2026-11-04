@@ -137,7 +137,7 @@ const Gurukul = () => {
                 </p>
                 <div className="text-sm border-t border-white/20 pt-4 flex items-center gap-2">
                    <div className="w-2 h-2 bg-[#FF9933] rounded-full animate-pulse"></div>
-                   <span className="font-semibold opacity-90">{language === 'en' ? 'Call for queries:' : 'पूछताछ के लिए कॉल करें:'} +91 9988776655</span>
+                   <span className="font-semibold opacity-90">{language === 'en' ? 'Call for queries:' : 'पूछताछ के लिए कॉल करें:'} +91 7789888000</span>
                 </div>
               </div>
               <div className="absolute -bottom-10 -right-10 opacity-10 group-hover:scale-110 transition-transform">
