@@ -9,7 +9,7 @@ const Footer = () => {
   const bankLabel = language === 'en' ? 'Bank' : 'बैंक';
   const branchLabel = language === 'en' ? 'Branch' : 'शाखा';
   const accountLabel = language === 'en' ? 'Account Number' : 'खाता संख्या';
-  const nameLabel = language === 'en' ? 'Name' : 'नाम';
+  const nameLabel = language === 'en' ? 'Account Holder' : 'खाता धारक';
   const ifscLabel = language === 'en' ? 'IFSC Code' : 'आईएफएससी कोड';
 
   return (
@@ -35,8 +35,8 @@ const Footer = () => {
           <div className="xl:col-span-3 flex flex-col gap-3 text-sm font-medium">
             <h3 className="text-lg font-bold mb-4 text-[#FF9933]">Contact Us</h3>
             <p className="text-gray-300">Email: <a href="mailto:info@gaushala.com" className="hover:text-[#FF9933]">info@gaushala.com</a></p>
-            <p className="text-gray-300">Phone: <a href="tel:+919988776655" className="hover:text-[#FF9933]">+91 99887 76655</a></p>
-            <p className="text-gray-300">Address: <a href="https://maps.app.goo.gl/" className="hover:text-[#FF9933]">Sacred Way, Nandgaon, Mathura</a></p>
+            <p className="text-gray-300">Phone: <a href="tel:+917789888000" className="hover:text-[#FF9933]">+91 77898 88000</a></p>
+            <p className="text-gray-300">Address: <a href="https://maps.google.com/?q=Near+Akashvani+kendra+Station+Road,+Main+Market,+Najibabad,+UP+246763" target="_blank" rel="noopener noreferrer" className="hover:text-[#FF9933]">Near Akashvani kendra Station Road, Main Market, Najibabad, UP 246763</a></p>
           </div>
           <div className="xl:col-span-3">
             <h3 className="text-2xl font-extrabold mb-5 text-[#FFB02E]">{donateTitle}</h3>
@@ -50,11 +50,11 @@ const Footer = () => {
               </div>
             </div>
             <div className="mt-6 space-y-3 text-white text-base leading-relaxed max-w-xs">
-              <p><span className="font-semibold">{bankLabel}</span> - HDFC Bank</p>
-              <p><span className="font-semibold">{branchLabel}</span> - Hodal</p>
-              <p><span className="font-semibold">{accountLabel}</span> - 50100026133002</p>
-              <p><span className="font-semibold">{nameLabel}</span> - Gau Seva Dham</p>
-              <p><span className="font-semibold">{ifscLabel}</span> - HDFC0001734</p>
+              <p><span className="font-semibold">{bankLabel}</span> - Axis Bank</p>
+              <p><span className="font-semibold">{branchLabel}</span> - Vijay Nagar, Indore</p>
+              <p><span className="font-semibold">{accountLabel}</span> - 925020019347442</p>
+              <p><span className="font-semibold">{nameLabel}</span> - Jyotishiwala</p>
+              <p><span className="font-semibold">{ifscLabel}</span> - UTIB0000568</p>
             </div>
           </div>
         </div>
