@@ -27,7 +27,7 @@ const Gurukul = () => {
     if (!/^\d{10}$/.test(formData.phone)) newErrors.phone = t.validation.phone;
     if (formData.address.trim().length < 10) newErrors.address = t.validation.address;
     if (!formData.education.trim()) newErrors.education = t.validation.education;
-    
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -62,7 +62,7 @@ const Gurukul = () => {
           </div>
           <h1 className="text-3xl font-bold">{language === 'en' ? 'Application Submitted!' : 'आवेदन जमा हो गया!'}</h1>
           <p className="text-gray-600">
-            {language === 'en' 
+            {language === 'en'
               ? `Thank you for your interest in our Gurukul. Our management will review the application and contact you soon on `
               : `हमारे गुरुकुल में आपकी रुचि के लिए धन्यवाद। हमारा प्रबंधन आवेदन की समीक्षा करेगा और जल्द ही आपसे संपर्क करेगा: `}
             <strong>{formData.phone}</strong>.
@@ -79,9 +79,9 @@ const Gurukul = () => {
     <div className="bg-[#EDDDC7]">
       {/* Banner Section */}
       <section className="relative h-[40vh] md:h-[60vh] overflow-hidden">
-        <img 
-          src="/Images/gurukul.png" 
-          alt="Gurukul Banner" 
+        <img
+          src="/Images/gurukul.webp"
+          alt="Gurukul Banner"
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-black/40 flex items-center justify-center text-center px-4">
@@ -100,7 +100,7 @@ const Gurukul = () => {
           <div className="space-y-8">
             <div className="card p-8 bg-white/50 backdrop-blur-sm border-2 border-white">
               <h2 className="text-3xl font-semibold mb-6 flex items-center gap-2">
-                <GraduationCap className="text-[#2E7D32]" /> 
+                <GraduationCap className="text-[#2E7D32]" />
                 {language === 'en' ? 'Why Join Our Gurukul?' : 'हमारे गुरुकुल में क्यों शामिल हों?'}
               </h2>
               <div className="flex gap-2 mb-8">
@@ -133,19 +133,19 @@ const Gurukul = () => {
               <div className="relative z-10">
                 <h3 className="text-2xl font-bold mb-2">{language === 'en' ? 'Admission Process' : 'प्रवेश प्रक्रिया'}</h3>
                 <p className="mb-4 text-green-50/80 font-medium">
-                   {language === 'en' ? 'Submit the form, attend an interview, and start your journey of wisdom.' : 'फॉर्म जमा करें, साक्षात्कार में शामिल हों और ज्ञान की अपनी यात्रा शुरू करें।'}
+                  {language === 'en' ? 'Submit the form, attend an interview, and start your journey of wisdom.' : 'फॉर्म जमा करें, साक्षात्कार में शामिल हों और ज्ञान की अपनी यात्रा शुरू करें।'}
                 </p>
                 <div className="text-sm border-t border-white/20 pt-4 flex items-center gap-2">
-                   <div className="w-2 h-2 bg-[#FF9933] rounded-full animate-pulse"></div>
-                   <span className="font-semibold opacity-90">{language === 'en' ? 'Call for queries:' : 'पूछताछ के लिए कॉल करें:'} +91 7789888000</span>
+                  <div className="w-2 h-2 bg-[#FF9933] rounded-full animate-pulse"></div>
+                  <span className="font-semibold opacity-90">{language === 'en' ? 'Call for queries:' : 'पूछताछ के लिए कॉल करें:'} +91 7789888000</span>
                 </div>
               </div>
               <div className="absolute -bottom-10 -right-10 opacity-10 group-hover:scale-110 transition-transform">
                 <GraduationCap size={200} />
               </div>
               <div className="absolute bottom-0 left-0 w-full h-1 flex">
-                 <div className="bg-[#FF9933] w-2/3 h-full"></div>
-                 <div className="bg-white/20 w-1/3 h-full"></div>
+                <div className="bg-[#FF9933] w-2/3 h-full"></div>
+                <div className="bg-white/20 w-1/3 h-full"></div>
               </div>
             </div>
           </div>
@@ -203,7 +203,7 @@ const Gurukul = () => {
                 {errors.education && <p className="text-red-500 text-xs mt-1">{errors.education}</p>}
               </div>
 
-              <button 
+              <button
                 disabled={loading}
                 className="w-full btn-primary py-4 text-xl flex items-center justify-center gap-2"
               >
@@ -216,39 +216,39 @@ const Gurukul = () => {
         {/* Philosophy Section */}
         <div className="mt-24 bg-white/40 backdrop-blur-md rounded-3xl p-8 md:p-16 border-2 border-white shadow-xl">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-             <div className="order-2 lg:order-1">
-                <h2 className="text-4xl font-semibold text-[#4D2D0E] mb-6">{t.philosophyTitle}</h2>
-                <div className="flex gap-2 mb-8">
-                  <div className="w-20 h-1 bg-[#2E7D32]"></div>
-                  <div className="w-10 h-1 bg-[#FF9933]"></div>
+            <div className="order-2 lg:order-1">
+              <h2 className="text-4xl font-semibold text-[#4D2D0E] mb-6">{t.philosophyTitle}</h2>
+              <div className="flex gap-2 mb-8">
+                <div className="w-20 h-1 bg-[#2E7D32]"></div>
+                <div className="w-10 h-1 bg-[#FF9933]"></div>
+              </div>
+              <p className="text-xl text-gray-600 leading-relaxed font-medium">
+                {t.philosophyText}
+              </p>
+              <div className="mt-10 grid grid-cols-2 gap-6">
+                <div className="p-4 bg-green-50 rounded-2xl border border-green-100">
+                  <div className="text-[#2E7D32] font-bold text-lg mb-1">Sanskara</div>
+                  <div className="text-gray-600 text-sm">{language === 'en' ? 'Values & Ethics' : 'मूल्य और नैतिकता'}</div>
                 </div>
-                <p className="text-xl text-gray-600 leading-relaxed font-medium">
-                  {t.philosophyText}
-                </p>
-                <div className="mt-10 grid grid-cols-2 gap-6">
-                   <div className="p-4 bg-green-50 rounded-2xl border border-green-100">
-                      <div className="text-[#2E7D32] font-bold text-lg mb-1">Sanskara</div>
-                      <div className="text-gray-600 text-sm">{language === 'en' ? 'Values & Ethics' : 'मूल्य और नैतिकता'}</div>
-                   </div>
-                   <div className="p-4 bg-green-50 rounded-2xl border border-green-100">
-                      <div className="text-[#2E7D32] font-bold text-lg mb-1">Vidya</div>
-                      <div className="text-gray-600 text-sm">{language === 'en' ? 'Holistic Knowledge' : 'समग्र ज्ञान'}</div>
-                   </div>
+                <div className="p-4 bg-green-50 rounded-2xl border border-green-100">
+                  <div className="text-[#2E7D32] font-bold text-lg mb-1">Vidya</div>
+                  <div className="text-gray-600 text-sm">{language === 'en' ? 'Holistic Knowledge' : 'समग्र ज्ञान'}</div>
                 </div>
-             </div>
-             <div className="order-1 lg:order-2">
-                <div className="relative">
-                   <img 
-                      src="/Images/gurukul2.png" 
-                      alt="Gurukul Life" 
-                      className="rounded-3xl shadow-2xl w-full h-[400px] object-cover border-8 border-white"
-                   />
-                   <div className="absolute -bottom-6 -left-6 bg-[#2E7D32] text-white p-6 rounded-2xl shadow-xl hidden md:block border-l-8 border-[#FF9933]">
-                      <div className="text-3xl font-bold mb-1">100%</div>
-                      <div className="text-sm font-medium opacity-90">{language === 'en' ? 'Traditional Methods' : 'पारंपरिक विधियाँ'}</div>
-                   </div>
+              </div>
+            </div>
+            <div className="order-1 lg:order-2">
+              <div className="relative">
+                <img
+                  src="/Images/gurukul2.webp"
+                  alt="Gurukul Life"
+                  className="rounded-3xl shadow-2xl w-full h-[400px] object-cover border-8 border-white"
+                />
+                <div className="absolute -bottom-6 -left-6 bg-[#2E7D32] text-white p-6 rounded-2xl shadow-xl hidden md:block border-l-8 border-[#FF9933]">
+                  <div className="text-3xl font-bold mb-1">100%</div>
+                  <div className="text-sm font-medium opacity-90">{language === 'en' ? 'Traditional Methods' : 'पारंपरिक विधियाँ'}</div>
                 </div>
-             </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
