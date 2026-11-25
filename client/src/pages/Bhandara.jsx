@@ -100,39 +100,63 @@ const Bhandara = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-          {/* Left: Plans */}
-          <div className="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
-            {categories.map((cat) => (
-              <div
-                key={cat.id}
-                onClick={() => setSelectedPlan(cat)}
-                className={`card p-8 cursor-pointer transition-all border-4 relative overflow-hidden group ${selectedPlan?.id === cat.id ? 'border-[#FF9933] scale-105 shadow-orange-200' : 'border-transparent opacity-80 hover:opacity-100 hover:bg-orange-100/50'}`}
-              >
-                {selectedPlan?.id === cat.id && (
-                  <div className="absolute top-0 right-0 p-4 opacity-5 pointer-events-none group-hover:scale-110 transition-transform">
-                    <Utensils size={100} />
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-start">
+          {/* Left: Plans & Video */}
+          <div className="lg:col-span-2 space-y-8">
+            {categories.length > 0 && (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {categories.map((cat) => (
+                  <div
+                    key={cat.id}
+                    onClick={() => setSelectedPlan(cat)}
+                    className={`card p-8 cursor-pointer transition-all border-4 relative overflow-hidden group ${selectedPlan?.id === cat.id ? 'border-[#FF9933] scale-105 shadow-orange-200' : 'border-transparent opacity-80 hover:opacity-100 hover:bg-orange-100/50'}`}
+                  >
+                    {selectedPlan?.id === cat.id && (
+                      <div className="absolute top-0 right-0 p-4 opacity-5 pointer-events-none group-hover:scale-110 transition-transform">
+                        <Utensils size={100} />
+                      </div>
+                    )}
+                    <div className="flex justify-between items-start mb-4">
+                      <div className="bg-orange-100 p-3 rounded-2xl shadow-sm text-[#FF9933]">
+                        <Users className="w-8 h-8" />
+                      </div>
+                      <div className="text-3xl font-bold text-[#4D2D0E]">₹{cat.price.toLocaleString()}</div>
+                    </div>
+                    <h3 className="text-2xl font-bold mb-2">{cat.title}</h3>
+                    <p className="text-gray-600 mb-4">
+                      {language === 'en' ? `Perfect for feeding approximately ${cat.peopleCount} persons.` : `लगभग ${cat.peopleCount} व्यक्तियों को खिलाने के लिए उत्तम।`}
+                    </p>
+                    <button className={`w-full py-4 rounded-full border  border-[#FF9933] font-bold text-md transition-all shadow-md ${selectedPlan?.id === cat.id ? 'bg-[#FF9933] text-white' : 'bg-white text-gray-400 group-hover:text-orange-400 hover:bg-orange-50 hover:shadow-xl hover:shadow-orange-300 hover:cursor-pointer  '}`}>
+                      {selectedPlan?.id === cat.id ? (language === 'en' ? 'Verified Plan' : 'सत्यापित योजना') : (language === 'en' ? 'Select Service' : 'सेवा चुनें')}
+                    </button>
+                    <div className={`mt-4 flex gap-1 transition-all duration-300 ${selectedPlan?.id === cat.id ? 'opacity-100' : 'opacity-0'}`}>
+                      <div className="w-full h-1 bg-orange-500 rounded-full"></div>
+                      <div className="w-8 h-1 bg-green-600 rounded-full"></div>
+                    </div>
                   </div>
-                )}
-                <div className="flex justify-between items-start mb-4">
-                  <div className="bg-orange-100 p-3 rounded-2xl shadow-sm text-[#FF9933]">
-                    <Users className="w-8 h-8" />
-                  </div>
-                  <div className="text-3xl font-bold text-[#4D2D0E]">₹{cat.price.toLocaleString()}</div>
-                </div>
-                <h3 className="text-2xl font-bold mb-2">{cat.title}</h3>
-                <p className="text-gray-600 mb-4">
-                  {language === 'en' ? `Perfect for feeding approximately ${cat.peopleCount} persons.` : `लगभग ${cat.peopleCount} व्यक्तियों को खिलाने के लिए उत्तम।`}
-                </p>
-                <button className={`w-full py-4 rounded-full border  border-[#FF9933] font-bold text-md transition-all shadow-md ${selectedPlan?.id === cat.id ? 'bg-[#FF9933] text-white' : 'bg-white text-gray-400 group-hover:text-orange-400 hover:bg-orange-50 hover:shadow-xl hover:shadow-orange-300 hover:cursor-pointer  '}`}>
-                  {selectedPlan?.id === cat.id ? (language === 'en' ? 'Verified Plan' : 'सत्यापित योजना') : (language === 'en' ? 'Select Service' : 'सेवा चुनें')}
-                </button>
-                <div className={`mt-4 flex gap-1 transition-all duration-300 ${selectedPlan?.id === cat.id ? 'opacity-100' : 'opacity-0'}`}>
-                  <div className="w-full h-1 bg-orange-500 rounded-full"></div>
-                  <div className="w-8 h-1 bg-green-600 rounded-full"></div>
-                </div>
+                ))}
               </div>
-            ))}
+            )}
+
+            {/* Bhandara Video Showcase */}
+            <div className="bg-white p-3 rounded-3xl shadow-xl border border-orange-100">
+              <div className="rounded-2xl overflow-hidden bg-[#2B1807] flex items-center justify-center">
+                <video
+                  src="/bhandara.mp4"
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  controls
+                  preload="auto"
+                  className="w-full max-h-[540px] object-contain block"
+                >
+                  {language === 'en'
+                    ? 'Your browser does not support the video tag.'
+                    : 'आपका ब्राउज़र वीडियो टैग को सपोर्ट नहीं करता है।'}
+                </video>
+              </div>
+            </div>
           </div>
 
           {/* Right: Form */}

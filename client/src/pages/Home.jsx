@@ -492,38 +492,59 @@ const Home = () => {
       </section>
 
       {/* Mission Section */}
-      <section className="py-24 bg-[#4D2D0E] text-white relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-br from-[#FF9933]/10 to-[#2E7D32]/10 -skew-x-12 transform translate-x-1/2"></div>
-        <div className="max-w-7xl mx-auto px-4 relative z-10">
-          <div className="max-w-3xl">
-            <h2 className="text-4xl md:text-5xl font-bold mb-8">
-              {translations[language].homeContent.missionTitle}
-            </h2>
-            <div className="flex gap-2 mb-10">
-              <div className="w-20 h-1.5 bg-[#FF9933]"></div>
-              <div className="w-10 h-1.5 bg-[#2E7D32]"></div>
-            </div>
-            <p className="text-2xl text-orange-50 leading-relaxed mb-12 opacity-90">
-              {translations[language].homeContent.missionText}
-            </p>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-orange-100">
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 bg-[#FF9933] rounded-2xl rotate-3 flex items-center justify-center flex-shrink-0 shadow-lg shadow-orange-500/20">
-                  <Heart size={24} />
+      <section className="py-12 md:py-16 bg-[#4D2D0E] text-white relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-br from-[#FF9933]/10 to-[#2E7D32]/10 -skew-x-12 transform translate-x-1/2 pointer-events-none"></div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-12">
+            <div className="flex-1 w-full">
+              <h2 className="text-3xl md:text-5xl font-bold mb-5">
+                {translations[language].homeContent.missionTitle}
+              </h2>
+              <div className="flex gap-2 mb-6">
+                <div className="w-20 h-1.5 bg-[#FF9933] rounded-full"></div>
+                <div className="w-10 h-1.5 bg-[#2E7D32] rounded-full"></div>
+              </div>
+              <p className="text-lg md:text-xl text-orange-50 leading-relaxed mb-8 opacity-90">
+                {translations[language].homeContent.missionText}
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 text-orange-100">
+                <div className="flex items-start gap-4 bg-white/5 border border-white/10 rounded-2xl p-4">
+                  <div className="w-12 h-12 bg-[#FF9933] rounded-2xl rotate-3 flex items-center justify-center flex-shrink-0 shadow-lg shadow-orange-500/20">
+                    <Heart size={24} />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-lg mb-1">{language === 'en' ? 'Compassion' : 'करुणा'}</h4>
+                    <p className="text-sm opacity-80">{language === 'en' ? 'Serving every soul with love' : 'हर जीव की प्रेम से सेवा'}</p>
+                  </div>
                 </div>
-                <div>
-                  <h4 className="font-bold text-lg mb-1">{language === 'en' ? 'Compassion' : 'करुणा'}</h4>
-                  <p className="text-sm opacity-80">{language === 'en' ? 'Serving every soul with love' : 'हर जीव की प्रेम से सेवा'}</p>
+                <div className="flex items-start gap-4 bg-white/5 border border-white/10 rounded-2xl p-4">
+                  <div className="w-12 h-12 bg-[#2E7D32] rounded-2xl -rotate-3 flex items-center justify-center flex-shrink-0 shadow-lg shadow-green-900/20">
+                    <GraduationCap size={24} />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-lg mb-1">{language === 'en' ? 'Preservation' : 'संरक्षण'}</h4>
+                    <p className="text-sm opacity-80">{language === 'en' ? 'Keeping Vedic wisdom alive' : 'वैदिक ज्ञान को जीवित रखना'}</p>
+                  </div>
                 </div>
               </div>
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 bg-[#2E7D32] rounded-2xl -rotate-3 flex items-center justify-center flex-shrink-0 shadow-lg shadow-green-900/20">
-                  <GraduationCap size={24} />
-                </div>
-                <div>
-                  <h4 className="font-bold text-lg mb-1">{language === 'en' ? 'Preservation' : 'संरक्षण'}</h4>
-                  <p className="text-sm opacity-80">{language === 'en' ? 'Keeping Vedic wisdom alive' : 'वैदिक ज्ञान को जीवित रखना'}</p>
-                </div>
+            </div>
+
+            <div className="flex-shrink-0 flex justify-center">
+              <div className="relative rounded-3xl overflow-hidden border-2 border-orange-200/30 bg-black/40 shadow-2xl w-fit max-w-full">
+                <video
+                  src="/WhatsApp%20Video.mp4"
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  controls
+                  preload="auto"
+                  className="block w-auto max-w-full max-h-[480px] md:max-h-[520px] object-contain"
+                >
+                  {language === 'en'
+                    ? 'Your browser does not support the video tag.'
+                    : 'आपका ब्राउज़र वीडियो टैग को सपोर्ट नहीं करता है।'}
+                </video>
               </div>
             </div>
           </div>
